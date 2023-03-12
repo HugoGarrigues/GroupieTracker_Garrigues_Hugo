@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+body{
+    font-family: 'test';
+}
+
+@font-face {
+    font-family: 'test';
+    src: url('../assets/fonts/LUMOS.TTF');
+}
+
+.navbar{
+    width: 100%;
+    height: 100px;
+    background-color: transparent;
+    display: flex;
+    position: fixed;
+    z-index: 1;
+}
+
+.logo{
+    height: 80px;
+    width: 60px;
+    filter: invert(100%);
+}
+
+.navbar-logo-hp{
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    width: 50%;
+}
+
+.navbar-boutons{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50%;
+}
+
+.navbar-boutons a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.video-container {
+    position: relative;
+    height: 85vh;
+  }
+  
+  .video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .text-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .text-overlay h1 {
+    font-size: 5rem;
+    width: 60%;
+    color: #fff;
+  }
+
+  .test{
+        background-color: red;
+        width: 100%;
+        height: 85vh;
+  }
+
+  @media screen and (max-width: 768px) {
+
+  }
+    
