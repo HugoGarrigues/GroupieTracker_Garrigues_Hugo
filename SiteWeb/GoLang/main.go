@@ -7,15 +7,18 @@ import (
 	"text/template"
 )
 
-type personnages struct {
-	Name  string `json:"name"`
-	House string `json:"house"`
+type Characters struct {
+	Name     string `json:"name"`
+	House    string `json:"house"`
+	Patronus string `json:"patronus"`
+	Alive    bool   `json:"alive"`
+	Image    string `json:"image"`
 }
 
 func main() {
-	// Lien vers le fichier CSS //
-	static := http.FileServer(http.Dir("CSS"))
-	http.Handle("../CSS/style.css", http.StripPrefix("../CSS/style.css", static))
+	// Lier le fichier css qui est dans ../CSS/style.css //
+	http.Handle("/CSS/", http.StripPrefix("/CSS/", http.FileServer(http.Dir("../CSS"))))
+
 	// Lien vers le fichier html //
 	tmpl, err := template.ParseFiles("../HTML/index.html")
 	if err != nil {
@@ -23,23 +26,55 @@ func main() {
 	}
 	// Création du serveur //
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		err := tmpl.Execute(w, nil)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
+		if r.Method == http.MethodPost {
+			err := r.ParseForm()
+			if err != nil {
+				http.Error(w, "Bad Request", http.StatusBadRequest)
+				return
+			}
+
+			class := r.FormValue("class")
+			if err != nil {
+				http.Error(w, "NUL", http.StatusBadRequest)
+				return
+			} else if class == "Gryffindor" {
+				class = "Gryffindor"
+			} else if class == "Slytherin" {
+				class = "Slytherin"
+			} else if class == "Ravenclaw" {
+				class = "Ravenclaw"
+			} else if class == "Hufflepuff" {
+				class = "Hufflepuff"
+			}
+
+			characters := characters_class(class)
+
+			err = tmpl.Execute(w, characters)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+		} else {
+			tmpl.Execute(w, nil)
 		}
 	})
+
 	http.ListenAndServe(":8080", nil)
-	// Récupération des données //
-	resp, err := http.Get("https://hp-api.onrender.com/api/characters")
+}
+
+func characters_class(class string) []Characters {
+	url := fmt.Sprintf("https://hp-api.onrender.com/api/characters/house/%s", class)
+	resp, err := http.Get(url)
 	if err != nil {
 		panic(err)
 	}
 	defer resp.Body.Close()
-	var p personnages
-	err = json.NewDecoder(resp.Body).Decode(&p)
+
+	var characters []Characters
+	err = json.NewDecoder(resp.Body).Decode(&characters)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(p.Name)
+
+	return characters
 }

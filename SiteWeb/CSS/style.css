@@ -3,13 +3,10 @@
     padding: 0;
   }
 
-body{
-    font-family: 'test';
-}
 
 @font-face {
     font-family: 'test';
-    src: url('../assets/fonts/LUMOS.TTF');
+    src: url('../assets/fonts/lumos.otf');
 }
 
 .navbar{
@@ -44,7 +41,8 @@ body{
 .navbar-boutons a{
     text-decoration: none;
     color: white;
-    font-size: 20px;
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium'if;
 }
 
 .video-container {
@@ -72,16 +70,13 @@ body{
   }
   
   .text-overlay h1 {
-    font-size: 5rem;
-    width: 60%;
+    font-size: 6em;
+    width: 80%;
     color: #fff;
+    letter-spacing: 4px;
+    font-family: 'test';
   }
 
-  .test{
-        background-color: red;
-        width: 100%;
-        height: 85vh;
-  }
 
   @media screen and (max-width: 768px) {
 
