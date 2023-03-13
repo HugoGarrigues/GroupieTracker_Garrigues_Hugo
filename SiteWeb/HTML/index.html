@@ -11,35 +11,37 @@
             <img class="logo" src="../assets/images/LogoHP.svg" alt="">
         </div>
         <div class="navbar-boutons">
-			<a href="http://localhost:8080/index.html" class="bouton">Characters</a>
+			<a href="http://localhost:8080/form.html" class="bouton">Characters</a>
 			<a href="http://localhost:8080/personnages.html" class="bouton">Spells</a>
 			<a href="http://localhost:8080/livres.html" class="bouton">Protagonist</a>
 			<a href="http://localhost:8080/films.html" class="bouton">Info</a>
 		</div>
     </header>
 	<div class="video-container">
-		<video src="../assets/images/Harry_Potter.mp4" muted autoplay loop> </video>
+		<video src="hp.mp4" muted autoplay loop> </video>
 		<div class="text-overlay">
 		  <h1>Discover the universe of Harry Potter</h1>
 		</div>
 	  </div>
-	  <div class="test"></div>
-		<form method="POST">
-			<label for="class">Classe :</label>
-			<input type="text" id="class" name="class" required>
-			<button type="submit">Rechercher</button>
-		</form>
-		{{if .}}
-		<ul>
-			{{range .}}
-			<li>{{.Name}}, {{.House}}, 
-				{{if .Alive}}vivant{{else}}mort{{end}}
-				{{if .Image}}
-                <img src="{{.Image}}" alt="{{.Name}}">
-            {{end}}
-			</li>
-			{{end}}
-		</ul>
-		{{end}}
+	  <div class="text-class">
+		<p>HOUSE</p>
+	  </div>
+	  <div class="house">
+	  <div class="class-1">
+		<div class="class-1-gryffindor">
+			<img src="../assets/images/gryffindor.png" alt="gryffindor">
+		</div>
+		<div class="class-1-slytherin">
+			<img src="../assets/images/slytherin.png" alt="slytherin">
+		</div>	
+	<div class="class-2">
+		<div class="class-2-ravenclaw">
+			<img src="../assets/images/ravenclaw.png" alt="ravenclaw">
+		</div>
+		<div class="class-2-hufflepuff">
+			<img src="../assets/images/hufflepuff.png" alt="hufflepuff">
+		</div>
+	</div>
+</div>
 </body>
 </html>

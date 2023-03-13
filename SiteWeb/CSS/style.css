@@ -6,7 +6,12 @@
 
 @font-face {
     font-family: 'test';
-    src: url('../assets/fonts/lumos.otf');
+    src: url('../assets/fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'test1';
+    src: url('../assets/fonts/Montserrat-Black.ttf');
 }
 
 .navbar{
@@ -41,13 +46,13 @@
 .navbar-boutons a{
     text-decoration: none;
     color: white;
-    font-size: 25px;
-    font-family: 'Franklin Gothic Medium'if;
+    font-size: 22px;
+    font-family: 'times new roman';
 }
 
 .video-container {
     position: relative;
-    height: 85vh;
+    height: 87vh;
   }
   
   .video-container video {
@@ -73,10 +78,32 @@
     font-size: 6em;
     width: 80%;
     color: #fff;
-    letter-spacing: 4px;
+    letter-spacing: 6px;
     font-family: 'test';
+    text-transform: uppercase;
   }
 
+.text-class{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 35px;
+    font-weight: 700;
+    font-family: 'test';
+}
+
+.class-1{
+  
+}
+
+.house img {
+    width: 140px;
+    height: 140px;
+}
 
   @media screen and (max-width: 768px) {
 

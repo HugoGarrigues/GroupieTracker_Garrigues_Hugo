@@ -20,7 +20,7 @@ func main() {
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", http.FileServer(http.Dir("../CSS"))))
 
 	// Lien vers le fichier html //
-	tmpl, err := template.ParseFiles("../HTML/index.html")
+	tmpl, err := template.ParseFiles("../HTML/form.html")
 	if err != nil {
 		panic(err)
 	}
