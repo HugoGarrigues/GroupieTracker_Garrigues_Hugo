@@ -32,7 +32,6 @@ func main() {
 				http.Error(w, "Bad Request", http.StatusBadRequest)
 				return
 			}
-
 			class := r.FormValue("class")
 			if err != nil {
 				http.Error(w, "NUL", http.StatusBadRequest)
