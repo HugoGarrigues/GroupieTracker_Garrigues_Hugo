@@ -16,16 +16,31 @@ type Characters struct {
 }
 
 func main() {
-	// Lier le fichier css qui est dans ../CSS/style.css //
+	// Lien vers le dossier CSS //
 	static := http.FileServer(http.Dir("CSS"))
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", static))
 
-	tmpl, err := template.ParseFiles("HTML/index.html")
+	// Lien vers le dossier HTML(index.html) soit tmpl1 //
+	tmpl1, err := template.ParseFiles("HTML/index.html")
 	if err != nil {
 		panic(err)
 	}
-	// Création du serveur //
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			tmpl1.Execute(w, nil)
+			return
+		}
+		tmpl1.Execute(w, nil)
+	})
+
+	// Lien vers le dossier HTML(characters.html) soit tmpl2 //
+	tmpl2, err := template.ParseFiles("HTML/characters.html")
+	if err != nil {
+		panic(err)
+	}
+
+	http.HandleFunc("/characters", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
 			err := r.ParseForm()
 			if err != nil {
@@ -48,16 +63,54 @@ func main() {
 
 			characters := characters_class(class)
 
-			err = tmpl.Execute(w, characters)
+			err = tmpl2.Execute(w, characters)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
 		} else {
-			tmpl.Execute(w, nil)
+			tmpl2.Execute(w, nil)
 		}
 	})
 
+	tmpl3, err := template.ParseFiles("HTML/spells.html")
+	if err != nil {
+		panic(err)
+	}
+
+	http.HandleFunc("/spells", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			tmpl3.Execute(w, nil)
+			return
+		}
+		tmpl3.Execute(w, nil)
+	})
+
+	tmpl4, err := template.ParseFiles("HTML/protagonists.html")
+	if err != nil {
+		panic(err)
+	}
+
+	http.HandleFunc("/protagonists", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			tmpl4.Execute(w, nil)
+			return
+		}
+		tmpl4.Execute(w, nil)
+	})
+
+	tmpl5, err := template.ParseFiles("HTML/infos.html")
+	if err != nil {
+		panic(err)
+	}
+
+	http.HandleFunc("/infos", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			tmpl5.Execute(w, nil)
+			return
+		}
+		tmpl5.Execute(w, nil)
+	})
 	http.ListenAndServe(":8080", nil)
 }
 

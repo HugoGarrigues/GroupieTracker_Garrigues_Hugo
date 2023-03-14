@@ -14,42 +14,6 @@
     src: url('../assets/Montserrat-Black.ttf');
 }
 
-.navbar{
-    width: 100%;
-    height: 100px;
-    background-color: transparent;
-    display: flex;
-    position: fixed;
-    z-index: 1;
-}
-
-.logo{
-    height: 80px;
-    width: 60px;
-    filter: invert(100%);
-}
-
-.navbar-logo-hp{
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-    width: 50%;
-}
-
-.navbar-boutons{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 50%;
-}
-
-.navbar-boutons a{
-    text-decoration: none;
-    color: white;
-    font-size: 22px;
-    font-family: 'times new roman';
-}
-
 .video-container {
     position: relative;
     height: 90vh;

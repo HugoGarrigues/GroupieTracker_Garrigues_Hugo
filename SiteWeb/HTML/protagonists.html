@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-logo-hp">
+            <img class="logo" src="../CSS/assets/LogoHP.svg" alt="">
+        </div>
+        <div class="navbar-boutons">
+			<a href="/characters" class="bouton">Characters</a>
+			<a href="/spells" class="bouton">Spells</a>
+			<a href="/protagonists" class="bouton">Protagonists</a>
+			<a href="/infos" class="bouton">Infos</a>
+		</div>
+    </header>
+    <form method="POST">
+        <label for="class">Classe :</label>
+        <input type="text" id="class" name="class" required>
+        <button type="submit">Rechercher</button>
+    </form>
+    {{if .}}
+    <ul>
+        {{range .}}
+        <li>{{.Name}}, {{.House}}, 
+            {{if .Alive}}vivant{{else}}mort{{end}}
+            {{if .Image}}
+            <img src="{{.Image}}" alt="{{.Name}}">
+        {{end}}
+        </li>
+        {{end}}
+    </ul>
+    {{end}}
+</body>
+</html>
