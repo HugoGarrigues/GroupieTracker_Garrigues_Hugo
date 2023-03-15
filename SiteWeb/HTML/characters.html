@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/navbar.css">
-    <link rel="stylesheet" href="../CSS/character.css">
     <title>Document</title>
 </head>
 <body>
@@ -18,10 +16,12 @@
     {{if .}}
     <ul>
         {{range .}}
-        <li>{{.Name}}, {{.House}}, 
+        <li>
+            <a href="/character/{{.Name}}">{{.Name}}</a>
+            , {{.House}}, 
             {{if .Alive}}vivant{{else}}mort{{end}}
             {{if .Image}}
-            <img src="{{.Image}}" alt="{{.Name}}">
+            <img src="{{.Image}}" alt="{{.Name}}" width="8%" height="8%">
         {{end}}
         </li>
         {{end}}

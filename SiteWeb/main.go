@@ -15,103 +15,94 @@ type Characters struct {
 	Image    string `json:"image"`
 }
 
+type Spells []struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
+type Wand struct {
+	Wood   string `json:"wood"`
+	Core   string `json:"core"`
+	Length int    `json:"length"`
+}
+
+type CharacterInfo []struct {
+	Name            string   `json:"name"`
+	AlternateNames  []string `json:"alternate_names"`
+	Species         string   `json:"species"`
+	Gender          string   `json:"gender"`
+	House           string   `json:"house"`
+	DateOfBirth     string   `json:"dateOfBirth"`
+	YearOfBirth     int      `json:"yearOfBirth"`
+	Wizard          bool     `json:"wizard"`
+	Ancestry        string   `json:"ancestry"`
+	EyeColour       string   `json:"eyeColour"`
+	HairColour      string   `json:"hairColour"`
+	Wand            Wand     `json:"wand"`
+	Patronus        string   `json:"patronus"`
+	HogwartsStudent bool     `json:"hogwartsStudent"`
+	HogwartsStaff   bool     `json:"hogwartsStaff"`
+	Actor           string   `json:"actor"`
+	AlternateActors []any    `json:"alternate_actors"`
+	Alive           bool     `json:"alive"`
+	Image           string   `json:"image"`
+}
+
 func main() {
-	// Lien vers le dossier CSS //
 	static := http.FileServer(http.Dir("CSS"))
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", static))
 
-	// Lien vers le dossier HTML(index.html) soit tmpl1 //
+	http.HandleFunc("/", index)
+	http.HandleFunc("/characters", characters)
+	http.HandleFunc("/spells", spells)
+
+	http.ListenAndServe(":8080", nil)
+}
+
+func index(w http.ResponseWriter, r *http.Request) {
 	tmpl1, err := template.ParseFiles("HTML/index.html")
 	if err != nil {
 		panic(err)
 	}
+	tmpl1.Execute(w, nil)
+}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			tmpl1.Execute(w, nil)
-			return
-		}
-		tmpl1.Execute(w, nil)
-	})
-
-	// Lien vers le dossier HTML(characters.html) soit tmpl2 //
-	tmpl2, err := template.ParseFiles("HTML/characters.html")
+func characters(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("HTML/characters.html")
 	if err != nil {
 		panic(err)
 	}
 
-	http.HandleFunc("/characters", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == http.MethodPost {
-			err := r.ParseForm()
-			if err != nil {
-				http.Error(w, "Bad Request", http.StatusBadRequest)
-				return
-			}
-			class := r.FormValue("class")
-			if err != nil {
-				http.Error(w, "NUL", http.StatusBadRequest)
-				return
-			} else if class == "Gryffindor" {
-				class = "Gryffindor"
-			} else if class == "Slytherin" {
-				class = "Slytherin"
-			} else if class == "Ravenclaw" {
-				class = "Ravenclaw"
-			} else if class == "Hufflepuff" {
-				class = "Hufflepuff"
-			}
-
-			characters := characters_class(class)
-
-			err = tmpl2.Execute(w, characters)
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
-				return
-			}
-		} else {
-			tmpl2.Execute(w, nil)
-		}
-	})
-
-	tmpl3, err := template.ParseFiles("HTML/spells.html")
-	if err != nil {
-		panic(err)
-	}
-
-	http.HandleFunc("/spells", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			tmpl3.Execute(w, nil)
+	if r.Method == http.MethodPost {
+		err := r.ParseForm()
+		if err != nil {
+			http.Error(w, "Bad Request", http.StatusBadRequest)
 			return
 		}
-		tmpl3.Execute(w, nil)
-	})
 
-	tmpl4, err := template.ParseFiles("HTML/protagonists.html")
-	if err != nil {
-		panic(err)
-	}
+		class := r.FormValue("class")
+		if err != nil {
+			http.Error(w, "NUL", http.StatusBadRequest)
+			return
+		} else if class == "Gryffindor" {
+			class = "Gryffindor"
+		} else if class == "Slytherin" {
+			class = "Slytherin"
+		} else if class == "Ravenclaw" {
+			class = "Ravenclaw"
+		} else if class == "Hufflepuff" {
+			class = "Hufflepuff"
+		}
 
-	http.HandleFunc("/protagonists", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			tmpl4.Execute(w, nil)
+		characters := characters_class(class)
+		err = tmpl.Execute(w, characters)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		tmpl4.Execute(w, nil)
-	})
-
-	tmpl5, err := template.ParseFiles("HTML/infos.html")
-	if err != nil {
-		panic(err)
+	} else {
+		tmpl.Execute(w, nil)
 	}
-
-	http.HandleFunc("/infos", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			tmpl5.Execute(w, nil)
-			return
-		}
-		tmpl5.Execute(w, nil)
-	})
-	http.ListenAndServe(":8080", nil)
 }
 
 func characters_class(class string) []Characters {
@@ -129,4 +120,29 @@ func characters_class(class string) []Characters {
 	}
 
 	return characters
+}
+
+func spells(w http.ResponseWriter, r *http.Request) {
+	tmpl3, err := template.ParseFiles("HTML/spells.html")
+	if err != nil {
+		panic(err)
+	}
+	url := "https://hp-api.onrender.com/api/spells"
+	resp, err := http.Get(url)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	var spells Spells
+	err = json.NewDecoder(resp.Body).Decode(&spells)
+	if err != nil {
+		panic(err)
+	}
+
+	err = tmpl3.Execute(w, spells)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
