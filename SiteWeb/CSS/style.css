@@ -67,33 +67,32 @@
     font-size: 35px;
     font-weight: 700;
     font-family: 'test';
-    border-top: 1px solid black;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes avec la même largeur */
   text-align: center;
 }
 
 .wrapper one{
-  grid-row-start: 1;
-  grid-row-end: 2;
+  grid-column-start: 1; 
+  grid-column-end: 2; 
 }
 
 .wrapper two{
-  grid-row-start: 2;
-  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
 }
 
 .wrapper three{
-  grid-row-start: 3;
-  grid-row-end: 4;
+  grid-column-start: 3; 
+  grid-column-end: 4; 
 }
 
 .wrapper four{
-  grid-row-start: 4;
-  grid-row-end: 5;
+  grid-column-start: 4; 
+  grid-column-end: 5; 
 }
 
 .wrapper p{
