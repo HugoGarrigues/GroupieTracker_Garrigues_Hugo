@@ -4,29 +4,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/character.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <title>Characters</title>
 </head>
 <body>
-    <div class="test">
-    <form method="POST">
-        <label for="class">Classe :</label>
-        <input type="text" id="class" name="class" required>
-        <button type="submit">Rechercher</button>
-    </form>
-    {{if .}}
-    <ul>
-        {{range .}}
-        <li>
-            <a href="/character/{{.Name}}">{{.Name}}</a>
-            , {{.House}}, 
-            {{if .Alive}}vivant{{else}}mort{{end}}
-            {{if .Image}}
-            <img src="{{.Image}}" alt="{{.Name}}" width="8%" height="8%">
+    <header class="navbar">
+        <div class="navbar-logo-hp">
+            <a href="/index"><img class="logo" src="../CSS/assets/LogoHP.svg" alt=""></a>
+        </div>
+        <div class="navbar-boutons">
+			<a href="/characters" class="bouton">Characters</a>
+			<a href="/spells" class="bouton">Spells</a>
+			<a href="/index#container-protagonist" class="bouton">Protagonists</a>
+			<a href="/index#house" class="bouton">House</a>
+		</div>
+    </header>
+    <div class="formulaire">
+        <form method="POST">
+            <label for="class">House :</label>
+            <br>
+            <input type="text" id="class" name="class" required>
+            <br>
+            <button type="submit">Rechercher</button>
+        </form>
+    </div>
+    <div class="cards-characters">
+        {{if .}}
+          {{range .}}
+            <div class="card">
+              {{if .Image}}
+                <div class="card-image">
+                  <img src="{{.Image}}" alt="{{.Name}}">
+                </div>
+              {{else}}
+                <div class="card-image">
+                  <img src="../CSS/assets/interrogation.jpg" alt="{{.Name}}">
+                </div>
+              {{end}}
+              <div class="card-text">
+                <p class="card-name">{{.Name}}</p>
+                <p class="card-text">House: {{.House}}</p>
+                <p class="card-text">Patronus: {{if not .Patronus}}No Patronus{{else}}{{.Patronus}}{{end}}</p>
+                <p class="card-text">Actor: {{if not .Actor}}No Actor{{else}}{{.Actor}}{{end}}</p>
+                <p class="card-text">Status: {{if .Alive}}Alive{{else}}Dead{{end}}</p>
+                <p class="card-text">
+                  House: {{.House}}
+                  {{if eq .House "Gryffindor"}}
+                     <a href="/gryffindor">More infos</a>
+                  {{else if eq .House "Slytherin"}}
+                     <a href="/slytherin">More infos</a>
+                  {{else if eq .House "Hufflepuff"}}
+                     <a href="/hufflepuff">More infos</a>
+                  {{else if eq .House "Ravenclaw"}}
+                     <a href="/ravenclaw">More infos</a>
+                  {{end}}
+               </p>
+              </div>
+            </div>
+          {{end}}
         {{end}}
-        </li>
-        {{end}}
-    </ul>
-    {{end}}
-</div>
+      </div>
 </body>
 </html>
