@@ -1,20 +1,35 @@
-
 <!DOCTYPE html>
-		<html>
-		<head>
-			<meta charset="UTF-8">
-			<title>Harry Potter Spells</title>
-			<link rel="stylesheet" href="/CSS/style.css">
-		</head>
-		<body>
-			<h1>Harry Potter Spells</h1>
-			<ul>
-			{{range .}}
-				<li>
-					<h2>{{.Name}}</h2>
-					<p>{{.Description}}</p>
-				</li>
-			{{end}}
-			</ul>
-		</body>
-		</html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Harry Potter Spells</title>
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/spells.css">
+</head>
+<body>
+<header class="navbar">
+    <div class="navbar-logo-hp">
+        <a href="/index"><img class="logo" src="../CSS/assets/LogoHP.svg" alt=""></a>
+    </div>
+    <div class="navbar-boutons">
+        <a href="/characters" class="bouton">Characters</a>
+        <a href="/spells" class="bouton">Spells</a>
+        <a href="/index#container-protagonist" class="bouton">Protagonists</a>
+        <a href="/index#house" class="bouton">House</a>
+    </div>
+</header>
+<div class="titre">
+    <h1>Harry Potter Spells</h1>
+</div>
+<div class="cards-spells">
+    {{range .}}
+        <div class="card">
+            <div class="card-text">
+				<p class="card-name">{{.Name}}</p>
+                <p class="card-text">{{.Description}}</p>
+            </div>
+        </div>
+    {{end}}
+</div>
+</body>
+</html>
