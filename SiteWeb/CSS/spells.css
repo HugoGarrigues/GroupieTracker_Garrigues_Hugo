@@ -39,11 +39,12 @@ align-items: center;
 
 .card {
   background-color: #fff;
-    width: 20vw;
+  width: 20vw;
   height: 200px; 
   margin: 15px;
   display: flex;
   text-align: center;
+  border-radius: 10px;
 }
 
 .card-text {
