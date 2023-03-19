@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'test';
-    src: url('../assets/Montserrat-Regular.ttf');
+    src: url('../CSS/assets/Montserrat-VariableFont_wght.ttf');
 }
 
 @font-face {
@@ -47,6 +47,6 @@
     text-decoration: none;
     color: white;
     font-size: 22px;
-    font-family: 'times new roman';
+    font-family: 'test';
 }
 
