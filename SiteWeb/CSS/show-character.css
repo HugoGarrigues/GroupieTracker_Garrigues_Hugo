@@ -3,6 +3,16 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: 'test';
+    src: url('../CSS/assets/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'test1';
+    src: url('../assets/Montserrat-Black.ttf');
+}
+
 body{
     background-image: url(../CSS/assets/fond_etoiles.jpg);
     background-size: cover;
@@ -11,6 +21,61 @@ body{
     background-position: center;
 }
 
-.card {
-    padding-top: 30vh;
+.titre{
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    padding-top: 12vh;
 }
+
+.titre p{
+    font-family: 'test';
+}
+
+.cards-characters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card {
+    background-color: #fff;
+    width: 49vw;
+    height: 100%; 
+    margin: 15px;
+    display: flex;
+    color: black;
+    margin-top: 3vh;
+  }
+  
+  .card-image {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+  
+  .card-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .name{
+        font-size: 3em;
+        font-family: 'test';
+        margin-bottom: 5vh;
+        margin-top: 2vh;
+  }
+
+  .text{
+        font-size: 1.1em;
+        font-family: 'test';
+  }

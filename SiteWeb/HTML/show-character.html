@@ -1,50 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>{{.Name}}</title>
-    <link rel="stylesheet" href="../CSS/navbar.css">
-    <link rel="stylesheet" href="../CSS/show-character.css">
+  <meta charset="UTF-8">
+  <title>{{.Name}}</title>
+  <link rel="stylesheet" href="../CSS/navbar.css">
+  <link rel="stylesheet" href="../CSS/show-character.css">
 </head>
+
 <body>
   <header class="navbar">
     <div class="navbar-logo-hp">
-        <a href="/index"><img class="logo" src="../CSS/assets/LogoHP.svg" alt=""></a>
+      <a href="/index"><img class="logo" src="../CSS/assets/LogoHP.svg" alt=""></a>
     </div>
     <div class="navbar-boutons">
-  <a href="/characters" class="bouton">Characters</a>
-  <a href="/spells" class="bouton">Spells</a>
-  <a href="/index#house" class="bouton">House</a>
-</div>
-</header>
-    <div class="card">
-        <p>{{.Name}}</p>
-        <p>{{.House}}</p>
-        <p>AlternateNames: {{if not .AlternateNames}}No AlternateNames{{else}}{{.AlternateNames}}{{end}}</p>
-        <p>{{.Species}}</p>
-        <p>{{.Gender}}</p>
-        <p>{{.House}}</p>
-        <p>DateOfBirth: {{if not .DateOfBirth}}No DateOfBirth{{else}}{{.DateOfBirth}}{{end}}</p>
-        <p> YearOfBirth: {{if not .YearOfBirth}}No YearOfBirth{{else}}{{.YearOfBirth}}{{end}}</p>
-        <p>{{.Wizard}}</p>
-        <p>{{.Ancestry}}</p>
-        <p>{{.EyeColour}}</p>
-        <p>{{.HairColour}}</p>
-        <p>Patronus: {{if not .Patronus}}No Patronus{{else}}{{.Patronus}}{{end}}</p>
-        <p>{{if .HogwartsStudent}}HogwartsStudent{{else}}No HogwartsStudent{{end}}</p>
-        <p>{{if .HogwartsStaff}}HogwartsStaff{{else}}No HogwartsStaff{{end}}</p>
-        <p>Actor: {{if not .Actor}}No Actor{{else}}{{.Actor}}{{end}}</p>
-        <p>AlternateActors: {{if not .AlternateActors}}No AlternateActors{{else}}{{.AlternateActors}}{{end}}</p>
-        <p>Status: {{if .Alive}}Alive{{else}}Dead{{end}}</p>
-        {{if .Image}}
-                <div class="card-image">
-                  <img src="{{.Image}}" alt="{{.Name}}">
-                </div>
-              {{else}}
-                <div class="card-image">
-                  <img src="../CSS/assets/interrogation.jpg" alt="{{.Name}}">
-                </div>
-              {{end}}
+      <a href="/characters" class="bouton">Characters</a>
+      <a href="/spells" class="bouton">Spells</a>
+      <a href="/index#house" class="bouton">House</a>
     </div>
+  </header>
+  <div class="titre">
+    <p>Informations about {{.Name}}</p>
+  </div>
+  <div class="cards-characters">
+    {{if .}}
+    <div class="card">
+      {{if .Image}}
+      <div class="card-image">
+        <img src="{{.Image}}" alt="{{.Name}}">
+      </div>
+      {{else}}
+      <div class="card-image">
+        <img src="../CSS/assets/interrogation.jpg" alt="{{.Name}}">
+      </div>
+      {{end}}
+      <div class="card-text">
+        <p class="name">{{.Name}}</p>
+        <p class="text">{{.House}}</p>
+        <p class="text">Alternate Names: {{if not .AlternateNames}}No AlternateNames{{else}}{{.AlternateNames}}{{end}}</p>
+        <p class="text">Species: {{.Species}}</p>
+        <p class="text">Gender: {{.Gender}}</p>
+        <p class="text">Date of Birth: {{if not .DateOfBirth}}No Date of Birth{{else}}{{.DateOfBirth}}{{end}}</p>
+        <p class="text">Year of Birth: {{if not .YearOfBirth}}No Year of Birth{{else}}{{.YearOfBirth}}{{end}}</p>
+        <p class="text">Wizard: {{.Wizard}}</p>
+        <p class="text">Ancestry: {{.Ancestry}}</p>
+        <p class="text">Eye Colour: {{.EyeColour}}</p>
+        <p class="text">Hair Colour: {{.HairColour}}</p>
+        <p class="text">Patronus: {{if not .Patronus}}No Patronus{{else}}{{.Patronus}}{{end}}</p>
+        <p class="text">{{if .HogwartsStudent}}Hogwarts Student{{else}}Not a Hogwarts Student{{end}}</p>
+        <p class="text">{{if .HogwartsStaff}}Hogwarts Staff{{else}}Not a Hogwarts Staff{{end}}</p>
+        <p class="text">Actor: {{if not .Actor}}Unknown{{else}}{{.Actor}}{{end}}</p>
+        <p class="text">Alternate Actors: {{if not .AlternateActors}}No AlternateActors{{else}}{{.AlternateActors}}{{end}}</p>
+        <p class="text">Status: {{if .Alive}}Alive{{else}}Dead{{end}}</p>
+      </div>
+    </div>
+    {{end}}
+  </div>
 </body>
 </html>
