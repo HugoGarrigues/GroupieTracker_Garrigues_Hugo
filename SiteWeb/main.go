@@ -53,9 +53,6 @@ func main() {
 	http.HandleFunc("/slytherin", slytherin)
 	http.HandleFunc("/ravenclaw", ravenclaw)
 	http.HandleFunc("/hufflepuff", hufflepuff)
-	http.HandleFunc("/harry", harryPotter)
-	http.HandleFunc("/hermione", hermione)
-	http.HandleFunc("/ron", ron)
 	http.HandleFunc("/show-character", showCharacter)
 
 	http.ListenAndServe(":8080", nil)
@@ -279,105 +276,6 @@ func showCharacter(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	err = tmpl.Execute(w, selectedCharacterInfo)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-}
-
-func harryPotter(w http.ResponseWriter, r *http.Request) {
-	url := "https://hp-api.onrender.com/api/characters"
-	resp, err := http.Get(url)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-
-	var characters []CharacterInfo
-	err = json.NewDecoder(resp.Body).Decode(&characters)
-	if err != nil {
-		panic(err)
-	}
-
-	var harry CharacterInfo
-	for _, character := range characters {
-		if character.Name == "Harry Potter" {
-			harry = character
-			break
-		}
-	}
-
-	tmpl, err := template.ParseFiles("HTML/harry.html")
-	if err != nil {
-		panic(err)
-	}
-	err = tmpl.Execute(w, harry)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-}
-
-func hermione(w http.ResponseWriter, r *http.Request) {
-	url := "https://hp-api.onrender.com/api/characters"
-	resp, err := http.Get(url)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-
-	var characters []CharacterInfo
-	err = json.NewDecoder(resp.Body).Decode(&characters)
-	if err != nil {
-		panic(err)
-	}
-
-	var hermione CharacterInfo
-	for _, character := range characters {
-		if character.Name == "Hermione Granger" {
-			hermione = character
-			break
-		}
-	}
-
-	tmpl, err := template.ParseFiles("HTML/hermione.html")
-	if err != nil {
-		panic(err)
-	}
-	err = tmpl.Execute(w, hermione)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-}
-
-func ron(w http.ResponseWriter, r *http.Request) {
-	url := "https://hp-api.onrender.com/api/characters"
-	resp, err := http.Get(url)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-
-	var characters []CharacterInfo
-	err = json.NewDecoder(resp.Body).Decode(&characters)
-	if err != nil {
-		panic(err)
-	}
-
-	var ron CharacterInfo
-	for _, character := range characters {
-		if character.Name == "Ron Weasley" {
-			ron = character
-			break
-		}
-	}
-
-	tmpl, err := template.ParseFiles("HTML/ron.html")
-	if err != nil {
-		panic(err)
-	}
-	err = tmpl.Execute(w, ron)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
