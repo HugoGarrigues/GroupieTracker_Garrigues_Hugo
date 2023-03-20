@@ -1,5 +1,5 @@
 # GroupieTracker_Garrigues_Hugo
-![Logo Harry Potter](SiteWeb/CSS/assets/images/LogoHP.png "Logo du site")
+![Logo Harry Potter](SiteWeb/CSS/assets/LogoHP.png "Logo du site")
 
 ## Le Projet :
 
